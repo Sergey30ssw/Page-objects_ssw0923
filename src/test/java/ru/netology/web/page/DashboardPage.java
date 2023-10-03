@@ -16,7 +16,6 @@ public class DashboardPage {
   public DashboardPage() {
 
     heading.shouldBe(Condition.visible);
-    $("[data-test-id='action-reload']").click();
   }
 
   public int getCardBalance(DataHelper.CardInfo cardInfo) {
