@@ -23,11 +23,11 @@ DashboardPage dashboardPage;
 
   }
 
-  @Test
+   @Test
   void shouldTransferMoneyFromFirstCardToSecond() {
     var firstCardBalance = dashboardPage.getCardBalance(getFirstCardInfo());
     var secondCardBalance = dashboardPage.getCardBalance(getSecondCardInfo());
-    var amount = generateValidAmount(firstCardBalance);
+    var amount = getValidAmount(firstCardBalance);
     var transferPage = dashboardPage.selectCardToTransfer(getSecondCardInfo());
     dashboardPage = transferPage.makeValidTransfer(String.valueOf(amount), getFirstCardInfo());
     var expectedBalanceFirstCard = firstCardBalance - amount;
@@ -42,9 +42,9 @@ DashboardPage dashboardPage;
   void shouldGetErrorMessageIfAmountMoreBalance() {
     var firstCardBalance = dashboardPage.getCardBalance(getFirstCardInfo());
     var secondCardBalance = dashboardPage.getCardBalance(getSecondCardInfo());
-    var amount = generateInvalidAmount(secondCardBalance);
-    var transferPage = dashboardPage.selectCardToTransfer(firstCardInfo());
-    transferPage.makeTransfer(String.valueOf(amount), secondCardInfo());
+    var amount = getInvalidAmount(secondCardBalance);
+    var transferPage = dashboardPage.selectCardToTransfer(getFirstCardInfo());
+    transferPage.makeTransfer(String.valueOf(amount), getSecondCardInfo());
     transferPage.findErrorMessage("Выполнена попытка перевода суммы, превышающей остаток на карте списания");
     var actualBalanceFirstCard = dashboardPage.getCardBalance(getFirstCardInfo());
     var actualBalanceSecondCard = dashboardPage.getCardBalance(getSecondCardInfo());
@@ -53,4 +53,3 @@ DashboardPage dashboardPage;
   }
 
 }
-
